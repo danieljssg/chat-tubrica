@@ -5,10 +5,10 @@ import { useActionState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Send, Bot, User } from "lucide-react";
+import { Send, Bot, User, Trash2 } from "lucide-react";
 import { AutoExpandingTextarea } from "./auto-expanding-textarea";
 import { MarkdownRenderer } from "./markdown-renderer";
-import { sendMessage } from "@/app/actions";
+import { sendMessage, clearMessages } from "@/app/actions";
 import { TypingIndicator } from "./typing-indicator";
 
 export function ChatInterface({ initialMessages }) {
@@ -19,6 +19,10 @@ export function ChatInterface({ initialMessages }) {
   });
   const scrollAreaRef = useRef(null);
   const formRef = useRef(null);
+  const [clearState, clearAction, isClearPending] = useActionState(
+    clearMessages,
+    { success: true }
+  );
 
   // Actualizar mensajes cuando cambie el estado inicial
   useEffect(() => {
@@ -61,10 +65,31 @@ export function ChatInterface({ initialMessages }) {
     <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
       <Card className="flex-1 flex flex-col">
         <CardHeader className="flex-shrink-0">
-          <CardTitle className="flex items-center gap-2">
-            <Bot className="w-6 h-6 text-blue-600" />
-            Chat con el Maestro - Especialista en Tuberías Conduit PVC
-          </CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="flex items-center gap-2">
+              <Bot className="w-6 h-6 text-blue-600" />
+              Chat con el Maestro - Especialista en Tuberías Conduit PVC
+            </CardTitle>
+            <form action={clearAction}>
+              <Button
+                type="submit"
+                variant="outline"
+                size="sm"
+                disabled={isClearPending || messages.length === 0}
+                className="text-red-600 hover:text-red-700 hover:bg-red-50 bg-transparent"
+              >
+                {isClearPending ? (
+                  <div className="w-4 h-4 border-2 border-red-600 border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <Trash2 className="w-4 h-4" />
+                )}
+                <span className="ml-1 hidden sm:inline">Limpiar Chat</span>
+              </Button>
+            </form>
+          </div>
+          {clearState?.error && (
+            <p className="text-red-600 text-sm mt-2">{clearState.error}</p>
+          )}
         </CardHeader>
 
         <CardContent className="flex-1 flex flex-col p-0">

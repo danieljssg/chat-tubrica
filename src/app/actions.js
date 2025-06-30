@@ -1,7 +1,7 @@
 "use server";
 
 import { generateResponse } from "@/lib/gemini";
-import { getMessages, saveMessage } from "@/lib/messages";
+import { getMessages, saveMessage, saveMessages } from "@/lib/messages";
 import { revalidatePath } from "next/cache";
 
 export async function sendMessage(prevState, formData) {
@@ -45,6 +45,23 @@ export async function sendMessage(prevState, formData) {
     return {
       success: false,
       error: "Error al enviar el mensaje. Por favor, intenta de nuevo.",
+    };
+  }
+}
+
+export async function clearMessages() {
+  try {
+    await saveMessages([]);
+    revalidatePath("/");
+    return {
+      success: true,
+      message: "Mensajes eliminados correctamente",
+    };
+  } catch (error) {
+    console.error("Error clearing messages:", error);
+    return {
+      success: false,
+      error: "Error al eliminar los mensajes",
     };
   }
 }
