@@ -1,7 +1,7 @@
 "use server";
 
 import { generateResponse } from "@/lib/gemini";
-import { getMessages, saveMessage, saveMessages } from "@/lib/messages";
+import { getMessages, saveMessage, clearMessages } from "@/lib/messages";
 import { revalidatePath } from "next/cache";
 
 export async function sendMessage(prevState, formData) {
@@ -49,9 +49,9 @@ export async function sendMessage(prevState, formData) {
   }
 }
 
-export async function clearMessages() {
+export async function clearAllMessages() {
   try {
-    await saveMessages([]);
+    await clearMessages();
     revalidatePath("/");
     return {
       success: true,

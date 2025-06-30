@@ -8,7 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Send, Bot, User, Trash2 } from "lucide-react";
 import { AutoExpandingTextarea } from "./auto-expanding-textarea";
 import { MarkdownRenderer } from "./markdown-renderer";
-import { sendMessage, clearMessages } from "@/app/actions";
+import { sendMessage, clearAllMessages } from "@/app/actions";
 import { TypingIndicator } from "./typing-indicator";
 
 export function ChatInterface({ initialMessages }) {
@@ -20,7 +20,7 @@ export function ChatInterface({ initialMessages }) {
   const scrollAreaRef = useRef(null);
   const formRef = useRef(null);
   const [clearState, clearAction, isClearPending] = useActionState(
-    clearMessages,
+    clearAllMessages,
     { success: true }
   );
 
