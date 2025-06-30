@@ -30,8 +30,7 @@ export function AutoExpandingTextarea({
       placeholder={placeholder}
       disabled={disabled}
       onKeyDown={onKeyDown}
-      className="min-h-16 resize-none overflow-hidden"
-      style={{ height: "64px" }} // h-16 inicial
+      className="min-h-16  max-h-60 resize-none  rounded-3xl p-5 w-full border-2 shadow-md"
     />
   );
 }

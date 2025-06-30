@@ -68,7 +68,8 @@ export function ChatInterface({ initialMessages }) {
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2">
               <Bot className="w-6 h-6 text-blue-600" />
-              Chat con el Maestro - Especialista en Tuberías Conduit PVC
+              Pregúntale al Maestro - Especialista en Tuberías y Conexiones de
+              PVC
             </CardTitle>
             <form action={clearAction}>
               <Button
@@ -98,9 +99,10 @@ export function ChatInterface({ initialMessages }) {
               {messages.length === 0 ? (
                 <div className="text-center text-gray-500 py-8">
                   <Bot className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-                  <p>
-                    ¡Hola! Soy el Maestro. Pregúntame sobre tuberías Conduit de
-                    PVC.
+                  <p className="max-w-md mx-auto">
+                    ¡Hola! Soy el Maestro. Puedes preguntarme cualquier cosa
+                    relacionada con Tuberías y conexiones de PVC, estoy aquí
+                    para ayudarte.
                   </p>
                 </div>
               ) : (
@@ -149,21 +151,26 @@ export function ChatInterface({ initialMessages }) {
           </ScrollArea>
 
           <div className="border-t p-4">
-            <form ref={formRef} action={handleSubmit} className="flex gap-2">
-              <div className="flex-1">
+            <form
+              ref={formRef}
+              action={handleSubmit}
+              className="flex flex-row gap-2 items-center justify-center"
+            >
+              <div className="flex-1 min-w-0">
                 <AutoExpandingTextarea
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Escribe tu pregunta sobre tuberías Conduit..."
+                  placeholder="Pregunta lo que necesites..."
                   disabled={isPending}
                   onKeyDown={handleKeyDown}
+                  style={{ wordWrap: "break-word", whiteSpace: "pre-wrap" }}
                 />
                 <input type="hidden" name="message" value={message} />
               </div>
               <Button
                 type="submit"
                 disabled={!message.trim() || isPending}
-                className="self-end"
+                className="flex-shrink-0"
               >
                 {isPending ? (
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
