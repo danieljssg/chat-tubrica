@@ -23,7 +23,7 @@ async function connectDB() {
   }
 
   if (!cached.promise) {
-    const dbName = MONGO_DB_NAME || "hr_saas_default";
+    const dbName = MONGO_DB_NAME || "test_chat";
     const mongoUriEndsWithSlash = MONGO_URI.endsWith("/");
     const separator = mongoUriEndsWithSlash ? "" : "/";
 
