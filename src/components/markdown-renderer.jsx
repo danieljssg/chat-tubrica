@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-export function MarkdownRenderer({ content }) {
+export const MarkdownRenderer = ({ content }) => {
   return (
     <div className="prose prose-sm max-w-none dark:prose-invert">
       <ReactMarkdown
@@ -30,4 +30,4 @@ export function MarkdownRenderer({ content }) {
       </ReactMarkdown>
     </div>
   );
-}
+};
