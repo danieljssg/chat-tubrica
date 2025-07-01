@@ -94,7 +94,7 @@ export function ChatInterface({ initialMessages }) {
         </CardHeader>
 
         <CardContent className="flex-1 flex flex-col p-0">
-          <ScrollArea ref={scrollAreaRef} className="flex-1 p-4">
+          <ScrollArea ref={scrollAreaRef} className="flex-1 p-4 pb-20">
             <div className="space-y-4">
               {messages.length === 0 ? (
                 <div className="text-center text-gray-500 py-8">
@@ -150,7 +150,7 @@ export function ChatInterface({ initialMessages }) {
             </div>
           </ScrollArea>
 
-          <div className="border-t p-4">
+          <div className="sticky bottom-0 bg-white border-t p-4 z-10 shadow-lg">
             <form
               ref={formRef}
               action={handleSubmit}
