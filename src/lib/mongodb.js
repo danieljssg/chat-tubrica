@@ -5,7 +5,7 @@ const { MONGO_URI, MONGO_DB_NAME, MONGO_CFG } = process.env;
 if (!MONGO_URI) {
   // MONGO_URI es esencial. MONGO_CFG puede ser opcional.
   throw new Error(
-    "Please define the MONGO_URI environment variable. MONGO_DB_NAME (e.g., 'hr_saas') and MONGO_CFG (e.g., '?retryWrites=true&w=majority', optional) are also used."
+    "Please define the MONGO_URI environment variable. MONGO_DB_NAME and MONGO_CFG (e.g., '?retryWrites=true&w=majority', optional) are also used."
   );
 }
 
@@ -31,10 +31,7 @@ async function connectDB() {
       MONGO_CFG || ""
     }`;
 
-    console.log(
-      "Attempting to connect to MongoDB:",
-      connectionString.replace(/:([^:@\s]+)@/, ":****@")
-    );
+    console.log("Attempting to connect to MongoDB");
 
     const opts = {
       bufferCommands: false,
