@@ -132,7 +132,7 @@ export function ChatInterface({ initialMessages }) {
           </div>
         </ScrollArea>
       </CardContent>
-      <CardFooter className="sticky bottom-0 border-t-2 p-4 z-10 flex flex-col w-full gap-2">
+      <CardFooter className="sticky bottom-0 border-t-2 p-4 z-10 flex flex-col w-full gap-2 bg-white">
         <form
           ref={formRef}
           action={handleSubmit}
